@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    image: api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    volumes:
+      - ./docker:/src
+    networks:
+      - node-network
+
+  # db:
+  #   image: mongo:6-jammy
+  #   ports:
+  #     - '27017:27017'
+  #   volumes:
+  #     - dbdata:/data/db
+  #   networks:
+  #     - node-network
+
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: expressApi
+    ports:
+      - "5432:5432"
+    networks:
+      - node-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: alaa@email.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - ./docker/pgadmin:/var/lib/pgadmin
+    networks:
+      - node-network
+
+volumes:
+  dbdata:
+
+
+networks:
+  node-network:
+    driver: bridge
