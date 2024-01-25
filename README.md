@@ -11,7 +11,7 @@ This repository contains practical labs and assignments completed during the Mic
 
 ## Technolgies Used
 
-Ensure you have the following tools and technologies installed before starting the labs:
+Ensure you have the following tools and technologies installed before running the labs:
 
 - [Docker](https://www.docker.com/)
 - [Node.js](https://nodejs.org/)
@@ -23,6 +23,10 @@ Ensure you have the following tools and technologies installed before starting t
    - Description: Call external API and reteive data using different libraries (axios, request...).
    - Files: [TP1-apiCall](TP1-apiCall)
 
-2. **Lab 2: Building a Simple Microservice (ExpressJS)**
-   - Description: Creating a basic microservice using Node.js (Express) and PostgreSQL database.
+2. **Lab 2: Building a Simple RESTful API (ExpressJS)**
+   - Description: Creating a basic RESTful Api using Node.js (Express) and PostgreSQL database.
    - Files: [TP2-expressRESTApi](TP2-expressRESTApi)
+
+3. **Lab 3: Building a Simple GraphQL API (ExpressJS, ApolloServer)**
+   - Description: Creating a basic GraphQL Api using Node.js (Express, ApolloServer) and MongoDB database.
+   - Files: [TP3-graphQLApi](TP2-graphQLApi)
