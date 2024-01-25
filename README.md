@@ -29,4 +29,4 @@ Ensure you have the following tools and technologies installed before running th
 
 3. **Lab 3: Building a Simple GraphQL API (ExpressJS, ApolloServer)**
    - Description: Creating a basic GraphQL Api using Node.js (Express, ApolloServer) and MongoDB database.
-   - Files: [TP3-graphQLApi](TP2-graphQLApi)
+   - Files: [TP3-graphQLApi](TP3-graphQLApi)
