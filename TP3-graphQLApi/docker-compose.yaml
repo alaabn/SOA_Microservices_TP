@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  gql_api:
+    build: .
+    image: tp3_graphqlapi
+    ports:
+      - '4000:4000'
+    depends_on:
+      - db
+    volumes:
+      - ./docker:/src
+    networks:
+      - node-network
+
+  db:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    restart: unless-stopped
+    volumes:
+      - db_mongodata:/data/db
+    networks:
+      - node-network
+
+  mongo-express:
+    image: mongo-express
+    container_name: compass
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://db:27017/graphqlapi
+      - ME_CONFIG_BASICAUTH_USERNAME=mexpress
+      - ME_CONFIG_BASICAUTH_PASSWORD=mexpress
+    links:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+
+volumes:
+  db_mongodata:
+
+
+networks:
+  node-network:
+    driver: bridge
