@@ -15,6 +15,7 @@ Ensure you have the following tools and technologies installed before running th
 
 - [Docker](https://www.docker.com/)
 - [Node.js](https://nodejs.org/)
+- [.NET Core](https://dotnet.microsoft.com/en-us/)
 - [Visual Studio Code](https://code.visualstudio.com/) (or your preferred code editor)
 
 ## Lab Descriptions
