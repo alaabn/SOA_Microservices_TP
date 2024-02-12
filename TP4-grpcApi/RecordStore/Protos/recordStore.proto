@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option csharp_namespace = "RecordStore";
+import "google/api/annotations.proto";
+package recordStore;
+
+service RecordStore {
+  rpc getRecords (GetRecordStoreRequest) returns (RecordsStoreResponse) {
+      option (google.api.http) = {
+        get: "/recordStrore"
+      };
+  }
+  rpc getRecordById (RecordStoreRequest) returns (RecordStoreResponse) {
+      option (google.api.http) = {
+        get: "/recordStrore/{id}"
+      };
+  }
+  rpc createRecord (CreateRecordRequest) returns (RecordStoreResponse) {
+      option (google.api.http) = {
+        post: "/recordStrore",
+        body: "*"
+      };
+  }
+  rpc deleteRecord (RecordStoreRequest) returns (RecordStoreDeletedResponse) {
+      option (google.api.http) = {
+        delete: "/recordStrore/{id}"
+      };
+  }
+}
+
+message RecordStoreResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message GetRecordStoreRequest{}
+
+message RecordsStoreResponse {
+  repeated RecordStoreResponse records = 1;
+}
+
+message RecordStoreDeletedResponse {
+  bool success = 1;
+}
+
+message RecordStoreRequest {
+  string id = 1;
+}
+
+message CreateRecordRequest {
+  string name = 1;
+}

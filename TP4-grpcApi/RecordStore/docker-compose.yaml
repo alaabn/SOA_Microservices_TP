@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  grpc-web_api:
+    build: .
+    container_name: grpc-web_jsonencoder_api
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+  sql:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=Root1234**
