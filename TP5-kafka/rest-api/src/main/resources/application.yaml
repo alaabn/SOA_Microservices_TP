@@ -1,0 +1,5 @@
+spring:
+    influx:
+        database: http://influx-db:8086/
+        username: user
+        password: root

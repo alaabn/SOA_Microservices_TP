@@ -1,0 +1,19 @@
+
+server:
+    port: 8082
+spring:
+    kafka:
+        bootstrap-servers: kafka:29092
+        consumer:
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+            properties:
+                spring:
+                    json:
+                        type:
+                            mapping: sensor:com.tp5.kafka.consumer.dto.SensorPayload
+    influx:
+        url: http://influx-db:8086/
+        username: user
+        password: root
+

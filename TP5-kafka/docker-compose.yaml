@@ -1,0 +1,70 @@
+version: '3.7'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 2181:2181
+    
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  rest-api:
+    image: 'rest-api:V0.1'
+    ports:
+          - "8080:8080"
+    build:
+        context: ${PWD}/rest-api
+    depends_on:
+          - influx-db
+
+  producer:
+    image: 'producer:V0.1'
+    ports:
+          - "8081:8081"
+    build:
+        context: ${PWD}/producer
+    depends_on:
+          - kafka
+
+  consumer:
+    image: 'consumer:V0.1'
+    ports:
+          - "8082:8082"
+    build:
+        context: ${PWD}/consumer/
+    depends_on:
+          - kafka
+          - influx-db
+
+  influx-db:
+    image: 'influx-kafka'
+    build:
+        context: ${PWD}/db/
+    environment:
+      DOCKER_INFLUXDB_INIT_CLI_CONFIG_NAME: configname
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_DB: tp5-kafka
+      DOCKER_INFLUXDB_INIT_USERNAME: user
+      DOCKER_INFLUXDB_INIT_PASSWORD: root
+      DOCKER_INFLUXDB_INIT_ORG: soa-tp
+      DOCKER_INFLUXDB_INIT_BUCKET: my-bucket
+      DOCKER_INFLUXDB_INIT_RETENTION: 1w
+      DOCKER_INFLUXDB_HTTP_AUTH_ENABLED: "true"
+    ports:
+      - "8086:8086"

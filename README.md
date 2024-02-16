@@ -16,6 +16,8 @@ Ensure you have the following tools and technologies installed before running th
 - [Docker](https://www.docker.com/)
 - [Node.js](https://nodejs.org/)
 - [.NET Core](https://dotnet.microsoft.com/en-us/)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Kafka](https://kafka.apache.org/)
 - [Visual Studio Code](https://code.visualstudio.com/) (or your preferred code editor)
 
 ## Lab Descriptions
@@ -35,3 +37,7 @@ Ensure you have the following tools and technologies installed before running th
 4. **Lab 3: Building a Simple gRPC API**
    - Description: Creating a basic gRPC Api using Node.js Express and MongoDB database.
    - Files: [TP4-grpcApi](TP4-grpcApi)
+
+5. **Lab 3: Building a Flow of Data with Kafka**
+   - Description: Creating 3 applications to demonstrate the use of the Kafka alonsgide InfluxDB database.
+   - Files: [TP5-kafka](TP5-kafka)
